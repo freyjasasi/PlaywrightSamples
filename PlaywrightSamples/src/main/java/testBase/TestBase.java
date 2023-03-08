@@ -16,7 +16,7 @@ public class TestBase {
 	public static Properties prop;
 	private String path = "configs//config.properties";
 	private static Playwright playwright;
-	public static Browser browser;
+	public static Browser browser; // we can create context where needed
 
 	public TestBase() {
 		prop = new Properties();

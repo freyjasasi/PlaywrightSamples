@@ -12,10 +12,10 @@ public class OpenAndClose extends TestBase {
 		super();
 	}
 
-	@Test(groups = { "sample", "openAndClose" })
+	@Test(groups = { "firstTest", "openAndClose" })
 	public void OpenCloseFirstTest() {
 		Page page = browser.newPage();
 		page.navigate(prop.getProperty("url"));
-		System.out.println(page.url());
+		System.out.println("Url: " + page.url() + " Title: " + page.title());
 	}
 }
