@@ -24,4 +24,12 @@
             <version>2.0.6</version>
         </dependency>
          </dependencies>
+         
+         <build>
+		<resources>
+			<resource>
+				<directory>configs</directory>
+			</resource>
+		</resources>
+	</build>
 </project>
