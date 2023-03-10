@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeTest;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
+import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
 public class TestBase {
@@ -17,6 +18,7 @@ public class TestBase {
 	private String path = "configs//config.properties";
 	private static Playwright playwright;
 	public static Browser browser; // we can create context where needed
+	public static Page page;
 
 	public TestBase() {
 		prop = new Properties();
@@ -45,6 +47,8 @@ public class TestBase {
 			System.out.println("please use valid browser name in properties file");
 			System.exit(0);
 		}
+
+		page = browser.newPage();
 	}
 
 	@BeforeTest
