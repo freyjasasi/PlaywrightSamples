@@ -9,10 +9,6 @@ import testBase.TestBase;
 
 public class ButtonTest extends TestBase {
 
-	ButtonTest() {
-		super();
-	}
-
 	@Test(groups = { "button" })
 	public void buttonTest01() {
 		ButtonPage buttonPage = ButtonPage.getInstance();

@@ -10,6 +10,9 @@ import testBase.TestBase;
 @Getter
 public class ButtonPage extends TestBase {
 
+	private ButtonPage() {
+	}
+
 	private static ButtonPage buttonPage;
 
 	public static ButtonPage getInstance() {

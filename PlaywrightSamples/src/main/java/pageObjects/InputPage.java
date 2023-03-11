@@ -8,6 +8,10 @@ import testBase.TestBase;
 @Getter
 public class InputPage extends TestBase {
 
+	private InputPage() {
+
+	}
+
 	private static InputPage inputPage;
 
 	public static InputPage getInstance() {

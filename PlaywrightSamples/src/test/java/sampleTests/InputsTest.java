@@ -7,10 +7,6 @@ import testBase.TestBase;
 
 public class InputsTest extends TestBase {
 
-	InputsTest() {
-		super();
-	}
-
 	@Test(groups = { "inputs" })
 	public void inputTests01() {
 		InputPage inputPage = InputPage.getInstance();
