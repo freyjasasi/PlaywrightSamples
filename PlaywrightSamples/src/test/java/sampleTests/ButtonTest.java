@@ -2,7 +2,7 @@ package sampleTests;
 
 import org.testng.annotations.Test;
 
-import com.microsoft.playwright.Locator.ClickOptions;
+import com.microsoft.playwright.Locator;
 
 import pageObjects.ButtonPage;
 import testBase.TestBase;
@@ -23,7 +23,7 @@ public class ButtonTest extends TestBase {
 		System.out.println("is Disabled button: " + buttonPage.getDisableButtonLocator().isDisabled());
 
 		System.out.println("Before button hold: " + buttonPage.getLongPressButtonLocator().textContent());
-		buttonPage.getLongPressButtonLocator().click(new ClickOptions().setDelay(4000));
+		buttonPage.getLongPressButtonLocator().click(new Locator.ClickOptions().setDelay(4000));
 		System.out.println("After button hold: " + buttonPage.getLongPressButtonLocator().textContent());
 
 	}
