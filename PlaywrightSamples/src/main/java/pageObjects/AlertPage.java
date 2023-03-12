@@ -11,7 +11,7 @@ public class AlertPage extends TestBase {
 	private AlertPage() {
 	}
 
-	public static AlertPage alertPage;
+	private static AlertPage alertPage;
 
 	public static AlertPage getInstance() {
 		if (alertPage == null) {
