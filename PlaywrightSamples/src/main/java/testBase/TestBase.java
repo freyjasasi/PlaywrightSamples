@@ -2,22 +2,26 @@ package testBase;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.Tracing;
 
 public class TestBase {
 
 	public static Properties prop;
 	private String path = "configs//config.properties";
 	private static Playwright playwright;
-	public static Browser browser; // we can create context where needed
+	private static Browser browser; // we can create context where needed
+	private static BrowserContext context;
 	public static Page page;
 
 	public TestBase() {
@@ -48,7 +52,19 @@ public class TestBase {
 			System.exit(0);
 		}
 
-		page = browser.newPage();
+		context = browser.newContext(
+				new Browser.NewContextOptions()
+						.setRecordVideoDir(Paths.get("videos/"))
+						.setRecordVideoSize(1280, 720));
+
+		context.tracing()
+				.start(new Tracing.StartOptions()
+						.setScreenshots(true)
+						.setSnapshots(true)
+						.setSources(false));
+
+		page = context.newPage();
+
 	}
 
 	@BeforeTest
@@ -58,6 +74,8 @@ public class TestBase {
 
 	@AfterTest
 	public void afterEachTest() {
+		context.tracing().stop(new Tracing.StopOptions().setPath(Paths.get("traces.zip")));
+		context.close();
 		browser.close();
 		playwright.close();
 	}
