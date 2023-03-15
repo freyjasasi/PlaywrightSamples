@@ -20,7 +20,10 @@ import com.microsoft.playwright.Tracing;
 public class TestBase {
 
 	public static Properties prop;
+
 	private String path = "configs//config.properties";
+	public static String time = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date());
+
 	private static Playwright playwright;
 	private static Browser browser; // we can create context where needed
 	private static BrowserContext context;
@@ -54,7 +57,6 @@ public class TestBase {
 			System.exit(0);
 		}
 
-		String time = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date());
 		context = browser.newContext(
 				new Browser.NewContextOptions()
 						.setRecordVideoDir(Paths.get("videos/test_recording_" + time))
@@ -77,15 +79,16 @@ public class TestBase {
 
 	@AfterTest
 	public void afterEachTest() {
-		String time = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date());
 		context.tracing().stop(new Tracing.StopOptions()
 				.setPath(Paths.get("test_traces/traces_" + time + ".zip")));
 		/*
 		 * to view the traces go to https://trace.playwright.dev/ and upload the zip
 		 * file
 		 */
-		context.close();
-		browser.close();
-		playwright.close();
+
+		context.close(); // profile
+		page.close(); // tab
+		browser.close(); // browser instance
+		playwright.close(); // playwright instance
 	}
 }
