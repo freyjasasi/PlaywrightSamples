@@ -3,6 +3,8 @@ package testBase;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 import org.testng.annotations.AfterTest;
@@ -52,10 +54,11 @@ public class TestBase {
 			System.exit(0);
 		}
 
+		String time = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date());
 		context = browser.newContext(
 				new Browser.NewContextOptions()
-						.setRecordVideoDir(Paths.get("videos/"))
-						.setRecordVideoSize(1280, 720));
+						.setRecordVideoDir(Paths.get("videos/test_recording_" + time))
+						.setRecordVideoSize(1280, 720)); // change size as per your screen resolution
 
 		context.tracing()
 				.start(new Tracing.StartOptions()
@@ -74,7 +77,13 @@ public class TestBase {
 
 	@AfterTest
 	public void afterEachTest() {
-		context.tracing().stop(new Tracing.StopOptions().setPath(Paths.get("traces.zip")));
+		String time = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date());
+		context.tracing().stop(new Tracing.StopOptions()
+				.setPath(Paths.get("test_traces/traces_" + time + ".zip")));
+		/*
+		 * to view the traces go to https://trace.playwright.dev/ and upload the zip
+		 * file
+		 */
 		context.close();
 		browser.close();
 		playwright.close();
