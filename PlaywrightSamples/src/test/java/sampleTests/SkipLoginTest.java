@@ -21,13 +21,13 @@ public class SkipLoginTest extends TestBase {
 		page.locator("(//span[text()='Login'])[2]").click();
 
 //		 saving auth, once saved you can use any number of times for login
-		context.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get("auth.json")));
+		context.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get("auths/bookCart_auth.json")));
 	}
 
 	@Test(groups = { "skipedLogin" })
 	public void skipLogin() {
 		BrowserContext context = browser.newContext(
-				new Browser.NewContextOptions().setStorageStatePath(Paths.get("auth.json")));
+				new Browser.NewContextOptions().setStorageStatePath(Paths.get("auths/bookCartauth.json")));
 		Page page = context.newPage();
 		page.navigate(prop.getProperty("bookCart"));
 
