@@ -25,8 +25,8 @@ public class TestBase {
 	public static String time = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss").format(new Date());
 
 	private static Playwright playwright;
-	private static Browser browser; // we can create context where needed
-	private static BrowserContext context;
+	protected static Browser browser; // we can create context where needed
+	protected static BrowserContext context;
 	public static Page page;
 
 	public TestBase() {
