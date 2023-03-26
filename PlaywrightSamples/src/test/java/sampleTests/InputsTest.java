@@ -10,14 +10,18 @@ public class InputsTest extends TestBase {
 	@Test(groups = { "inputs" })
 	public void inputTests01() {
 		InputPage inputPage = InputPage.getInstance();
+
 		page.navigate(prop.getProperty("letCodeInputUrl"));
-		inputPage.getFullName().fill("demo");
-		inputPage.getAppendText().type("filling by appending "); // TODO
-		inputPage.getAppendText().press("Tab");
+		inputPage.getFullName().fill("demo"); // copy paste
+		inputPage.getAppendText().type("filling by appending "); // typing
+
+		inputPage.getAppendText().press("Tab"); // keyboard operation
 		System.out.println(inputPage.getGetMe().getAttribute("value"));
-		inputPage.getClearMe().clear();
+		inputPage.getClearMe().clear(); // clear the text box
+
+		// Assertions
 		System.out.println("is Not Editable: " + inputPage.getEditableOrNot().isDisabled());
-		System.out.println("is readOnly: " + inputPage.getReadOnly().isEnabled()); // TODO
+		System.out.println("is readOnly: " + inputPage.getReadOnly().isEnabled());
 	}
 
 }
